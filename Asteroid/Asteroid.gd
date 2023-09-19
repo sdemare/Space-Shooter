@@ -4,7 +4,7 @@ var initial_speed = 100.0
 var health = 10
 
 func _ready():
-	velocity = Vector2(0, initial_speed*randf()).rotated(2*PI*randf())
+	velocity = Vector2(0,initial_speed*randf()).rotated(2*PI*randf())
 	
 
 func _physics_process(_delta):

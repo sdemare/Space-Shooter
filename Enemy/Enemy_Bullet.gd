@@ -9,7 +9,6 @@ var Explosion = load("res://Effects/explosion.tscn")
 
 
 
-
 func _ready():
 	velocity = Vector2(0,-speed).rotated(rotation)
 
