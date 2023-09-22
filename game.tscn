@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://pgxhj5p5f3xi"]
+[gd_scene load_steps=9 format=3 uid="uid://pgxhj5p5f3xi"]
 
 [ext_resource type="PackedScene" uid="uid://divtt5mklasgf" path="res://Player/player.tscn" id="1_hnxxg"]
 [ext_resource type="PackedScene" uid="uid://c2ekaw7m8xapc" path="res://Asteroid/asteroid.tscn" id="2_h0vyi"]
 [ext_resource type="Script" path="res://Player/Player_Container.gd" id="2_h4wey"]
 [ext_resource type="PackedScene" uid="uid://bqb48fq1vkwkf" path="res://Enemy/enemy.tscn" id="3_mhc5q"]
+[ext_resource type="FontFile" uid="uid://eovki1ov0tao" path="res://Assets/Hyperspace Bold.otf" id="5_a4dqr"]
+[ext_resource type="Script" path="res://UI/HUD.gd" id="5_sy11x"]
+[ext_resource type="Script" path="res://UI/Menu.gd" id="7_4hd5c"]
+[ext_resource type="FontFile" uid="uid://04166g3w54qe" path="res://Assets/Hyperspace.otf" id="8_ewnsh"]
 
 [node name="Game" type="Node2D"]
 
@@ -27,3 +31,117 @@ position = Vector2(576, 324)
 
 [node name="Enemy" parent="Enemy_Container" instance=ExtResource("3_mhc5q")]
 position = Vector2(400, 100)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_sy11x")
+
+[node name="Score" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 1
+offset_left = 10.0
+offset_right = 210.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("5_a4dqr")
+theme_override_font_sizes/font_size = 20
+text = "Score: "
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -210.0
+offset_right = -10.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("5_a4dqr")
+theme_override_font_sizes/font_size = 20
+text = "Time: "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Indicator_Container" type="Control" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Timer" type="Timer" parent="CanvasLayer/HUD"]
+autostart = true
+
+[node name="Menu" type="Control" parent="CanvasLayer"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_4hd5c")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 400.0
+theme_override_fonts/font = ExtResource("8_ewnsh")
+theme_override_font_sizes/font_size = 60
+text = "Pause Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Restart" type="Button" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -20.0
+offset_right = 100.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_a4dqr")
+theme_override_font_sizes/font_size = 20
+text = "Restart Game"
+
+[node name="Quit" type="Button" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 40.0
+offset_right = 100.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_a4dqr")
+theme_override_font_sizes/font_size = 20
+text = "Quit"
+
+[connection signal="timeout" from="CanvasLayer/HUD/Timer" to="CanvasLayer/HUD" method="_on_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/Menu/Restart" to="CanvasLayer/Menu" method="_on_restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/Menu/Quit" to="CanvasLayer/Menu" method="_on_quit_pressed"]
