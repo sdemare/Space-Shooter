@@ -1,7 +1,7 @@
 # Space-Shooter
 Project 2 for MSCH-C220
 
-Description
+Space Shooter game. Player uses a ship to attack another and astroids for points
 
 ## Implementation
 Game was written in Godot 2 and exported on Github
