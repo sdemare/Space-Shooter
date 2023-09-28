@@ -26,11 +26,12 @@ func _physics_process(_delta):
 	velocity += get_input()*speed
 	velocity = velocity.normalized() * clamp(velocity.length(), 0, max_speed)
 	
-	position.x = wrapf(position.x, 0, Global.VP.x)
-	position.y = wrapf(position.y, 0, Global.VP.y)
+	position.x = wrapf(position.x, 0, 1800)
+	position.y = wrapf(position.y, 0, 1000)
 	velocity = velocity.normalized() * clamp(velocity.length(), 0, max_speed)
 	
 	move_and_slide()
+	
 	
 	if Input.is_action_just_pressed("Shoot"):
 		var bullet = Bullet.instantiate()
